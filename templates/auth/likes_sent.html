@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ホーム | WEBプログラマ・マッチングアプリ</title>
+    <title>送ったいいね一覧 | WEBプログラマ・マッチングアプリ</title>
 
     <!-- Bootstrap CSS -->
     <link
@@ -22,12 +22,26 @@
         <!-- ▼ メインカラム -->
         <div class="col-lg-9">
           <!-- ▼ プロフィールカード一覧 -->
-            <h2>いいねした人</h2>
+          
+              <h3 class="recommended-heading text-center">
+  <i class="fas fa-star fa-beat text-warning me-2"></i>
+  < 🎵 あなたが送ったいいね⭐は、ありません  >
+</h3>
           <div
             class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4"
           >
             {% for user in like_sent %} {% include 'main/profile_card.html' %}
-            {% else %} <p class="text-muted">まだ誰にもいいねしていません。</p>
+            {% else %}
+            
+            <div class="container my-4">
+  <div class="d-flex justify-content-center">
+    <div class="alert alert-light border text-center shadow-sm rounded py-4 w-100" style="max-width: 600px;">
+      <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
+      <strong>まだ送ったいいねは、ありません</strong>
+      
+    </div>
+  </div>
+</div>
             {% endfor %}
           </div>
         </div>
@@ -37,8 +51,8 @@
           <a href="/main?tab=recommend">ホーム</a>
           <a href="/my_profile">マイページ</a>
           <a href="/matched">マッチした人</a>
-          <a href="/likes/sent">いいねした人</a>
-          <a href="/likes/received">いいねされた人</a>
+          <a href="/likes/sent">送ったいいね</a>
+          <a href="/likes/received">もらったいいね</a>
           <a href="/contact">お問い合わせ</a>
           <a href="/logout">ログアウト</a>
         </div>

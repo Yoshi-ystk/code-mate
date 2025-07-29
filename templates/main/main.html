@@ -53,28 +53,101 @@
           </form>
 
           <!-- ▼ プロフィールカード一覧 -->
-          <h2>あなたと相性ピッタリ！おすすめのユーザー</h2>
-          <div
-            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4"
-          >
-            {% for user in profiles %} {% include 'main/profile_card.html' %} {%
-            endfor %}
+        
+       <h3 class="recommended-heading text-center">
+  <i class="fas fa-star fa-beat text-warning me-2"></i>
+  < 👉あなたと相性ピッタリ！おすすめのユーザー >
+</h3>
+        
+        
+        
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">  
+          {% for user in profiles %}
+          {% include 'main/profile_card.html' %}
+          {% endfor %}
           </div>
         </div>
 
         <!-- ▼ サイドバー -->
         <div class="col-lg-3 sidebar mt-4 mt-lg-0">
-          <a href="/main?tab=recommend">ホーム</a>
-          <a href="/my_profile">マイページ</a>
-          <a href="/matched">マッチした人</a>
-          <a href="/likes/sent">いいねした人</a>
-          <a href="/likes/received">いいねされた人</a>
+		<a href="/main?tab=recommend">ホーム</a>
+        <a href="/myprofile">マイページ</a>
+       <!-- 通知付きリンク -->
+        <a href="/matched">
+    マッチした人 <span class="bell" id="bell-match">🔔</span>
+  </a>
+         <a href="/likes/sent">
+    送ったいいね <span class="bell" id="bell-liked">🔔</span>
+  </a>
+         <a href="/likes/received">
+    もらったいいね <span class="bell" id="bell-got-liked">🔔</span>
+  </a>
           <a href="/contact">お問い合わせ</a>
           <a href="/logout">ログアウト</a>
         </div>
       </div>
     </div>
 
+    <footer class="app-footer">
+  <div class="footer-center">© 2025 CodeMate. All rights reserved.</div>
+  <a href="attention.html" target="_blank" rel="noopener noreferrer" class="footer-terms-link">利用規約</a>
+</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  
+  
+  <script>
+  async function checkNotifications() {
+    try {
+      const res = await fetch('/api/notifications');
+      const data = await res.json();
+
+      // 各ベルの表示制御
+      document.getElementById('bell-match').style.display = data.match ? 'inline' : 'none';
+      document.getElementById('bell-liked').style.display = data.liked ? 'inline' : 'none';
+      document.getElementById('bell-got-liked').style.display = data.got_liked ? 'inline' : 'none';
+    } catch (error) {
+      console.error('通知取得エラー:', error);
+    }
+  }
+
+// ページロード時に通知を確認
+  checkNotifications();
+  setInterval(checkNotifications, 30000); // 30秒ごとに更新
+
+  function markAsRead(type) {
+    // 🔔 を非表示
+    const bell = document.getElementById(`bell-${type}`);
+    if (bell) {
+      bell.style.display = 'none';
+    }
+
+    // Flask に既読を送信
+    fetch('/api/notifications/read', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ type: type }),
+    }).then(response => {
+      if (!response.ok) {
+        console.error('通知の既読化に失敗しました');
+      }
+    });
+  // **既読処理後、即座に最新通知状態を再取得**
+  checkNotifications();
+  }
+
+  // ここから追加部分：DOMContentLoaded でクリックイベントをセット
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('bell-match').addEventListener('click', () => markAsRead('match'));
+    document.getElementById('bell-liked').addEventListener('click', () => markAsRead('liked'));
+    document.getElementById('bell-got-liked').addEventListener('click', () => markAsRead('got_liked'));
+  });
+</script>
+  
     <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
 
     <!-- Bootstrap JS -->

@@ -3,187 +3,89 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>検索結果 | WEBプログラマ・マッチングアプリ</title>
+    <title>検索一覧 | WEBプログラマ・マッチングアプリ</title>
 
+    <!-- Bootstrap CSS -->
     <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='css/style.css') }}"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
     />
-
-    <style>
-        body {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background: linear-gradient(to bottom right, #f2f9ff, #e0e7ff);
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        }
-
-        .outer-wrapper {
-        max-width: 1200px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        }
-
-        header {
-        background: linear-gradient(90deg, #57bcde, #8e54db);
-        padding: 15px 20px;
-        text-align: center;
-        }
-
-        header img {
-        height: 60px;
-        max-width: 90%;
-        }
-
-        .filter-form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px;
-        margin: 20px 0;
-        }
-
-        .filter-form select {
-        padding: 10px;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-        }
-
-        .filter-form button {
-        padding: 10px 20px;
-        border: none;
-        background-color: #4f46e5;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        }
-
-        .container {
-        display: flex;
-        gap: 20px;
-        background: white;
-        border-radius: 12px;
-        padding: 20px;
-        box-sizing: border-box;
-        flex: 1;
-        min-height: 500px;
-        }
-
-        .main-content {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        flex-grow: 1;
-        min-width: 0;
-        }
-
-        .sidebar {
-        width: 220px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
-        padding: 20px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        flex-shrink: 0;
-        }
-
-        .sidebar a {
-        text-decoration: none;
-        color: #4f46e5;
-        font-weight: bold;
-        padding: 10px;
-        border-radius: 6px;
-        text-align: center;
-        background-color: #f9f9ff;
-        transition: background 0.3s;
-        }
-
-        .sidebar a:hover {
-        background-color: #eef3ff;
-        background: linear-gradient(90deg, #57bcde, #8e54db);
-        }
-
-        footer {
-        background: linear-gradient(90deg, #57bcde, #8e54db);
-        color: white;
-        text-align: center;
-        padding: 15px 10px;
-        font-size: 0.9em;
-        margin-top: auto;
-        }
-
-        @media (max-width: 768px) {
-        .container {
-            flex-direction: column;
-        }
-        .sidebar {
-            width: 100%;
-            order: -1;
-        }
-        .main-content {
-            grid-template-columns: 1fr !important;
-        }
-        header img {
-            height: 40px;
-        }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
     <header>
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" />
     </header>
 
-    <div class="outer-wrapper">
-        <!-- 検索フォーム -->
-        <form class="filter-form" method="GET" action="/search">
-        <select name="language">
+    <div class="outer-wrapper"></div>
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <!-- ▼ メインカラム -->
+        <div class="col-lg-9">
+          <!-- ▼ フィルター検索フォーム（中央揃えに修正） -->
+          <form
+            class="filter-form d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4"
+            method="GET"
+            action="/search"
+          >
+            <select name="language" class="form-select w-auto">
             <option value="">使用言語を選択</option>
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-            <option value="PHP">PHP</option>
-            <option value="ruby">Ruby</option>
-            <option value="csharp">C#</option>
-        </select>
+              <option value="python" {% if request.args.get('language') == 'python' %}selected{% endif %}>Python</option>
+              <option value="java" {% if request.args.get('language') == 'java' %}selected{% endif %}>Java</option>
+              <option value="PHP" {% if request.args.get('language') == 'PHP' %}selected{% endif %}>PHP</option>
+              <option value="ruby" {% if request.args.get('language') == 'ruby' %}selected{% endif %}>Ruby</option>
+              <option value="csharp" {% if request.args.get('language') == 'csharp' %}selected{% endif %}>C#</option>
+            </select>
 
-        <select name="field">
+            <select name="dev_field" class="form-select w-auto">
             <option value="">開発分野を選択</option>
-            <option value="web">Web開発</option>
-            <option value="mobile">モバイルアプリ</option>
-            <option value="ai">AI / 機械学習</option>
-            <option value="game">ゲーム開発</option>
-            <option value="embedded">組み込みシステム</option>
-        </select>
+              <option value="web" {% if request.args.get('dev_field') == 'web' %}selected{% endif %}>Web開発</option>
+              <option value="mobile" {% if request.args.get('dev_field') == 'mobile' %}selected{% endif %}>モバイルアプリ</option>
+              <option value="ai" {% if request.args.get('dev_field') == 'ai' %}selected{% endif %}>AI / 機械学習</option>
+              <option value="game" {% if request.args.get('dev_field') == 'game' %}selected{% endif %}>ゲーム開発</option>
+              <option value="embedded" {% if request.args.get('dev_field') == 'embedded' %}selected{% endif %}>組み込みシステム</option>
+            </select>
 
-        <button type="submit">再検索</button>
+            <button type="submit" class="btn btn-primary">表示</button>
         </form>
 
-        <div class="container">
-        <!-- 検索結果 -->
-        <main class="main-content">
+          <!-- ▼ プロフィールカード一覧 -->
+           <h3 class="recommended-heading text-center">
+  <i class="fas fa-star fa-beat text-warning me-2"></i>
+  < 🔍 検索結果一覧  >
+</h3>
+         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
             {% if profiles %} {% for user in profiles %} {% include
             'main/profile_card.html' %} {% endfor %} {% else %}
-            <p>検索条件に一致するユーザーが見つかりませんでした。</p>
+             <div class="container my-4">
+  <div class="d-flex justify-content-center">
+    <div class="alert alert-light border text-center shadow-sm rounded py-4 w-100" style="max-width: 600px;">
+      <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
+      <strong>検索条件に一致するユーザーが見つかりませんでした</strong>
+      
+    </div>
+  </div>
+</div>
             {% endif %}
-        </main>
-
-        <aside class="sidebar">
-            <a href="/main">ホームに戻る</a>
-            <a href="/logout">ログアウト</a>
-        </aside>
+          </div>
         </div>
+
+        <!-- ▼ サイドバー -->
+        <div class="col-lg-3 sidebar mt-4 mt-lg-0">
+          <a href="/main?tab=recommend">ホーム</a>
+          <a href="/my_profile">マイページ</a>
+          <a href="/matched">マッチした人</a>
+          <a href="/likes/sent">送ったいいね</a>
+          <a href="/likes/received">もらったいいね</a>
+          <a href="/contact">お問い合わせ</a>
+            <a href="/logout">ログアウト</a>
+    </div>
+</div>
     </div>
 
     <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

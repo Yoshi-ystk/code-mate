@@ -22,18 +22,11 @@
     <div class="profile-image-wrapper">
       <label for="profilePic" class="profile-label">
         <div class="profile-pic-preview">
-          <!-- デフォルトアイコン -->
-          <i id="defaultIcon"
-            class="fas fa-user profile-icon {% if user.image %}is-hidden{% endif %}">
-          </i>
-          <!-- ユーザー画像 -->
-          {% if user.image_path %}
+           <!-- ユーザー画像またはデフォルト画像 --> <!--#7/29山本修正デフォルトの参照を画像参照に変更(png)-->
           <img id="preview"
-          src="{{ url_for('static', filename=user.image_path) }}"
-          alt="プロフィール画像">
-          {% else %}
-          <i id="preview" class="fas fa-user profile-icon"></i>
-          {% endif %}
+     src="{{ url_for('static', filename=(user.image_path if user.image_path and user.image_path.startswith('uploads/') else 'img/default.png')) }}"
+     alt="プロフィール画像"
+     style="display:block;">
           <!-- カメラアイコン -->
           <i class="fas fa-camera camera-icon"></i>
         </div>
@@ -49,12 +42,11 @@
     <script>
       function previewImage(event) {
         const preview = document.getElementById("preview");
-        const icon = document.getElementById("defaultIcon");
         const file = event.target.files[0];
         if (file) {
           preview.src = URL.createObjectURL(file);
           preview.style.display = "block";
-          if (icon) icon.style.display = "none";
+
         }
       }
     </script>
@@ -170,7 +162,7 @@
   }
 
   document.getElementById("closeBtn").addEventListener("click", () => {
-    window.location.href = "main.html";
+    window.location.href = "/main?tab=recommend";
   });
 
   // 編集完了時 → 通常の form POST として送信

@@ -5,15 +5,15 @@
   >
     <div class="card h-100">
       <img
-        src="{{ url_for('static', filename=user.image_path) if user.image_path else 'https://via.placeholder.com/300x180' }}"
-        class="card-img-top"
+      src="{{ url_for('static', filename=(user.image_path if user.image_path.startswith('uploads/') else 'img/default.png')) }}"
         alt="{{ user.name }}"
+      class="profile-img-circle" 
       />
       <div class="card-body">
         <h5 class="card-title">{{ user.name }}</h5>
         <p class="card-text">
           <strong>言語:</strong> {{ user.language }}<br />
-          <strong>分野:</strong> {{ user.field }}
+          <strong>分野:</strong> {{ user.def_field }}
         </p>
       </div>
     </div>

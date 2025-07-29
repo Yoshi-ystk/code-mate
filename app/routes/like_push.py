@@ -1,7 +1,6 @@
-from flask import jsonify, session
-from flask import Blueprint
-from app.models.user import db
-from app.models.likes import Likes
+from flask import Blueprint, request, jsonify, session
+from app.models.user import User
+from app.models.likes import Likes, db
 
 like_push_bp = Blueprint("like_push", __name__)
 
