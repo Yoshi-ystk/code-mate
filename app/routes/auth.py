@@ -1,4 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, session, current_app
+from flask_login import (
+    LoginManager,
+    login_user,
+    logout_user,
+    login_required,
+    current_user,
+)
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from app.models.user import User, db
@@ -12,6 +19,15 @@ import os
 
 auth_bp = Blueprint("auth", __name__, template_folder="../../templates")
 
+login_manager = LoginManager()
+login_manager.login_view = "auth.top"
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 @auth_bp.route("/", methods=["GET", "POST"])
 @auth_bp.route("/top", methods=["GET", "POST"])
 def top():
@@ -20,7 +36,7 @@ def top():
         password = request.form["password"]
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
-            session["user_id"] = user.id
+            login_user(user)
             return redirect("/main")
         else:
             return render_template("auth/login_failed.html")
@@ -78,7 +94,7 @@ def register():
             user.image_path = f"uploads/{user.id}/{filename}"
             db.session.commit()
 
-        session["user_id"] = user.id
+        login_user(user)
         return redirect("/main")
 
     return render_template("auth/register_profile.html")
@@ -86,5 +102,5 @@ def register():
 
 @auth_bp.route("/logout")
 def logout():
-    session.pop("user_id", None)
+    logout_user()
     return redirect("/top")
