@@ -5,7 +5,6 @@ from app.models.likes import Likes
 
 like_push_bp = Blueprint("like_push", __name__)
 
-
 @like_push_bp.route("/favorite/<int:user_id>", methods=["POST"])
 def like_push(user_id):
     if "user_id" not in session:

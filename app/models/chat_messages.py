@@ -1,7 +1,6 @@
 from app.models import db
 from sqlalchemy.sql import func
 
-
 class ChatMessage(db.Model):
     __tablename__ = "chatmessage"
     id = db.Column(db.Integer, primary_key=True)

@@ -37,8 +37,6 @@ def create_app():
             db.create_all()
             print("✅ Database and tables created successfully.")
 
-    
-
     # Blueprint登録
     app.register_blueprint(auth_bp)
     app.register_blueprint(profile_bp)
@@ -68,7 +66,7 @@ def create_app():
         db.session.query(Likes.to_user)
         .filter(Likes.from_user == current_user.id)
         .subquery()
-)
+        )
 
         # おすすめユーザーを取得（マッチ済み、いいね済み除外）
         recommended = (

@@ -12,7 +12,6 @@ import os
 
 auth_bp = Blueprint("auth", __name__, template_folder="../../templates")
 
-
 @auth_bp.route("/", methods=["GET", "POST"])
 @auth_bp.route("/top", methods=["GET", "POST"])
 def top():
@@ -26,7 +25,6 @@ def top():
         else:
             return render_template("auth/login_failed.html")
     return render_template("auth/top.html")
-
 
 @auth_bp.route("/register_profile", methods=["GET", "POST"])
 def register():

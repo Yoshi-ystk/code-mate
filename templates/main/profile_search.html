@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>検索結果 | WEBプログラマ・マッチングアプリ</title>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    />
 
     <style>
-    body {
+        body {
         margin: 0;
         font-family: "Segoe UI", sans-serif;
         background: linear-gradient(to bottom right, #f2f9ff, #e0e7ff);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-    }
+        }
 
-    .outer-wrapper {
+        .outer-wrapper {
         max-width: 1200px;
         width: 100%;
         margin: 0 auto;
@@ -26,43 +29,43 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-    }
+        }
 
-    header {
+        header {
         background: linear-gradient(90deg, #57bcde, #8e54db);
         padding: 15px 20px;
         text-align: center;
-    }
+        }
 
-    header img {
+        header img {
         height: 60px;
         max-width: 90%;
-    }
+        }
 
-    .filter-form {
+        .filter-form {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 15px;
         margin: 20px 0;
-    }
+        }
 
-    .filter-form select {
+        .filter-form select {
         padding: 10px;
         border-radius: 6px;
         border: 1px solid #ccc;
-    }
+        }
 
-    .filter-form button {
+        .filter-form button {
         padding: 10px 20px;
         border: none;
         background-color: #4f46e5;
         color: white;
         border-radius: 6px;
         cursor: pointer;
-    }
+        }
 
-    .container {
+        .container {
         display: flex;
         gap: 20px;
         background: white;
@@ -71,17 +74,17 @@
         box-sizing: border-box;
         flex: 1;
         min-height: 500px;
-    }
+        }
 
-    .main-content {
+        .main-content {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
         flex-grow: 1;
         min-width: 0;
-    }
+        }
 
-    .sidebar {
+        .sidebar {
         width: 220px;
         background: white;
         border-radius: 10px;
@@ -92,9 +95,9 @@
         flex-direction: column;
         gap: 20px;
         flex-shrink: 0;
-    }
+        }
 
-    .sidebar a {
+        .sidebar a {
         text-decoration: none;
         color: #4f46e5;
         font-weight: bold;
@@ -103,23 +106,23 @@
         text-align: center;
         background-color: #f9f9ff;
         transition: background 0.3s;
-    }
+        }
 
-    .sidebar a:hover {
+        .sidebar a:hover {
         background-color: #eef3ff;
         background: linear-gradient(90deg, #57bcde, #8e54db);
-    }
+        }
 
-    footer {
+        footer {
         background: linear-gradient(90deg, #57bcde, #8e54db);
         color: white;
         text-align: center;
         padding: 15px 10px;
         font-size: 0.9em;
         margin-top: auto;
-    }
+        }
 
-    @media (max-width: 768px) {
+        @media (max-width: 768px) {
         .container {
             flex-direction: column;
         }
@@ -144,28 +147,28 @@
     <div class="outer-wrapper">
         <!-- 検索フォーム -->
         <form class="filter-form" method="GET" action="/search">
-            <select name="language">
+        <select name="language">
             <option value="">使用言語を選択</option>
             <option value="python">Python</option>
             <option value="java">Java</option>
             <option value="PHP">PHP</option>
             <option value="ruby">Ruby</option>
             <option value="csharp">C#</option>
-            </select>
+        </select>
 
-            <select name="field">
+        <select name="field">
             <option value="">開発分野を選択</option>
             <option value="web">Web開発</option>
             <option value="mobile">モバイルアプリ</option>
             <option value="ai">AI / 機械学習</option>
             <option value="game">ゲーム開発</option>
             <option value="embedded">組み込みシステム</option>
-            </select>
+        </select>
 
-            <button type="submit">再検索</button>
+        <button type="submit">再検索</button>
         </form>
 
-    <div class="container">
+        <div class="container">
         <!-- 検索結果 -->
         <main class="main-content">
             {% if profiles %} {% for user in profiles %} {% include
@@ -178,8 +181,8 @@
             <a href="/main">ホームに戻る</a>
             <a href="/logout">ログアウト</a>
         </aside>
+        </div>
     </div>
-</div>
 
     <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
 </body>
