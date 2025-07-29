@@ -1,0 +1,72 @@
+7/29進捗
+
+
+１、デフォルト画像表示の変更
+
+①user.py 
+→デフォルト画像のcolumnの参照方法をdefault.jpg→default.png変更
+
+②my_profile.html
+→デフォルト画像の参照をローカルファイルdefault.png参照に変更
+
+③style.css
+→profile-pic-preview imgのdisplay: none;の削除
+
+④register_profile.html
+→デフォルト画像の参照をローカルファイルdefault.png参照に変更
+
+
+２、いいねした星の保持
+・user_profile.html
+→is_favorite というフラグをテンプレートに渡し、サーバー側で「このユーザーをいいね済みか」判定。
+→押すたびに /favorite/<user_id> に POST 送信。
+
+・recommend_profile.py
+→from flask import Blueprint, render_template, request, jsonify, sessionの追加(★のセッション保持)
+
+・style.css
+→★の保持で追加　.favorite-btn.active {
+    color: gold;
+}
+
+・like_push.py
+→sessionの追記from flask import Blueprint, request, jsonify, sessio
+
+３、プロフィールカードの画像を丸く囲う
+①style.css
+→.profile-img-circleの追加
+
+②profile_card.html
+→ class="profile-img-circle"の追加
+
+③user_profile.html
+→ class="profile-img-circle"の追加
+
+４、いいねされたとき、マッチングしたりして通知
+①likes.py 
+→ is_read = db.Column(db.Boolean, default=False)追加 
+カラムは通知の既読管理に使う
+通知を「未読/既読」で判別するためのフラグが必要だから。
+
+②uses.db
+likesのテーブル内にis_readというcolumeを追加
+既読機能
+
+③like_push.py
+いいね処理
+→ いいね送信時に is_read = False を設定（相手が通知を受け取るため）
+未読通知API /api/notifications
+
+→ ホーム画面で「ベルを表示するか」を判定するため。
+既読更新API /api/notifications/read
+→ ユーザーがベルをクリックしたら is_read = True にして非表示にするため。
+
+④main.html
+→サイドバーに通知ベル（🔔）を追加。
+JSで /api/notifications を定期チェック（30秒ごと）。
+クリック時に /api/notifications/read を呼び出して即UI更新。
+いいね送信者のいいね通知は不要。削除
+
+⑤notifications.py→××削除××不要
+→新規作成。通知欄の管理
+
