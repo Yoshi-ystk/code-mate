@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ホーム | WEBプログラマ・マッチングアプリ</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" />
+  </header>
+
+  <!--<div class="outer-wrapper"></div>-->
+  <div class="container-fluid mt-4">
+    <div class="row">
+      <!-- ▼ メインカラム -->
+      <div class="col-lg-9">
+        <!-- ▼ フィルター検索フォーム（中央揃えに修正） -->
+        <form 
+          class="filter-form d-flex flex-wrap justify-content-center align-items-center gap-3 mb-4"
+          method="GET"
+          action="/search"
+        >
+          <select name="language" class="form-select w-auto">
+            <option value="">使用言語を選択</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+            <option value="PHP">PHP</option>
+            <option value="Ruby">Ruby</option>
+            <option value="C#">C#</option>
+          </select>
+
+          <select name="dev_field" class="form-select w-auto">
+            <option value="">開発分野を選択</option>
+            <option value="Web開発">Web開発</option>
+            <option value="モバイルアプリ">モバイルアプリ</option>
+            <option value="AI / 機械学習">AI / 機械学習</option>
+            <option value="ゲーム開発">ゲーム開発</option>
+            <option value="組み込みシステム">組み込みシステム</option>
+          </select>
+
+          <button type="submit" class="btn btn-primary">表示</button>
+        </form>
+
+        <!-- ▼ プロフィールカード一覧 -->
+
+        <h3 class="recommended-heading text-center">
+          <i class="fas fa-star fa-beat text-warning me-2"></i>
+          < 👉あなたと相性ピッタリ！おすすめのユーザー>
+        </h3>
+
+
+
+
+        <!--<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">-->
+		<div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+		  {% for user in profiles %}
+          {% include 'main/profile_card.html' %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- ▼ サイドバー -->
+      <div class="col-lg-3 sidebar mt-4 mt-lg-0">
+        <a href="/main?tab=recommend">ホーム</a>
+        <a href="/my_profile">マイページ</a>
+        <a href="/matched">
+          マッチした人 <span class="bell" id="bell-match" style="display:none;">🔔</span>
+        </a>
+        <a href="/likes/sent">いいねした人</a>
+        <!-- 7/29山本削除 いいねした人には通知不要 -->
+        <a href="/likes/received">
+          いいねされた人 <span class="bell" id="bell-got-liked" style="display:none;">🔔</span>
+        </a>
+        <a href="/chat_list">チャットルーム</a>
+        <a href="/contact">お問い合わせ</a>
+        <a href="/logout">ログアウト</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
+    <div class="footer-center">© 2025 CodeMate. All rights reserved.</div>
+    <a href="{{ url_for('show_attention') }}" target="_blank" rel="noopener noreferrer" class="footer-terms-link">利用規約</a>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <script>
+    // ✅ 通知確認　7/29山本　修正 既読 既読処理API呼び出し後、checkNotifications()で再描画。
+    async function checkNotifications() {
+      try {
+        const res = await fetch('/api/notifications');
+        const data = await res.json();
+        document.getElementById('bell-match').style.display = data.match ? 'inline' : 'none';
+        document.getElementById('bell-got-liked').style.display = data.got_liked ? 'inline' : 'none';
+      } catch (err) {
+        console.error('通知チェックエラー:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', checkNotifications);
+
+    // ✅ 既読処理
+    async function markAsRead(type) {
+      await fetch('/api/notifications/read', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type })
+      });
+      checkNotifications();
+    }
+
+    // ✅ クリック時に既読化してからページ遷移
+    document.addEventListener('DOMContentLoaded', () => {
+      const matchLink = document.querySelector('a[href="/matched"]');
+      const likedLink = document.querySelector('a[href="/likes/received"]');
+
+      if (matchLink) {
+        matchLink.addEventListener('click', async (e) => {
+          e.preventDefault();
+          await markAsRead('match'); // ✅ 既読処理
+          window.location.href = '/matched'; // ✅ その後遷移
+        });
+      }
+
+      if (likedLink) {
+        likedLink.addEventListener('click', async (e) => {
+          e.preventDefault();
+          await markAsRead('got_liked');
+          window.location.href = '/likes/received';
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

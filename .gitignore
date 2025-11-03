@@ -1,0 +1,40 @@
+# Python 全般
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pkl
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+# VSCode
+.vscode/
+.history/
+
+# macOS
+.DS_Store
+
+# Pipenv/Poetry
+Pipfile.lock
+poetry.lock
+
+# Flask/Middleware キャッシュやセッション
+*.bak
+*.swp
+*.tmp
+
+# その他
+*.orig
+*.swo
+*.swp
+*.tmp
+*.bak
+*.old
+
+# pytest などの一時ファイル
+.cache/
+.tox/
+.pytest_cache/

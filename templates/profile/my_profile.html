@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>マイページ</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="WEBプログラマ・マッチングアプリのロゴ">
+  </header>
+  <div class="container-pr">
+    <form id="profileForm"
+    method="POST"
+    action="/my_profile"
+    enctype="multipart/form-data">
+    <!-- プロフィール画像 -->
+    <div class="profile-image-wrapper">
+      <label for="profilePic" class="profile-label">
+        <div class="profile-pic-preview">
+           <!-- ユーザー画像またはデフォルト画像 --> <!--#7/29山本修正デフォルトの参照を画像参照に変更(png)-->
+          <img id="preview"
+     src="{{ url_for('static', filename=(user.image_path if user.image_path and user.image_path.startswith('uploads/') else 'img/default.png')) }}"
+     alt="プロフィール画像"
+     style="display:block;">
+          <!-- カメラアイコン -->
+          <i class="fas fa-camera camera-icon"></i>
+        </div>
+      </label>
+      <input type="file"
+      id="profilePic"
+      name="image"
+      accept="image/*"
+      onchange="previewImage(event)"
+      style="display: none">
+    </div>
+    <!-- JSは1回だけ -->
+    <script>
+      function previewImage(event) {
+        const preview = document.getElementById("preview");
+        const file = event.target.files[0];
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = "block";
+
+        }
+      }
+    </script>
+    <h2>{{ user.name }} さんのマイページ</h2>
+    <!-- 各項目 -->
+    <div class="field">
+      <label>名前</label>
+      <span id="nameText">{{ user.name }}</span>
+      <input type="text" name="name" id="nameInput" value="{{ user.name }}">
+    </div>
+    <div class="field">
+      <label>性別</label>
+      <span id="genderText">{{ user.gender or '未設定' }}</span>
+      <select name="gender" id="genderInput">
+        <option value="">選択してください</option>
+        <option value="男性" {{ 'selected' if user.gender=='男性' else '' }}>男性
+        </option>
+        <option value="女性" {{ 'selected' if user.gender=='女性' else '' }}>女性
+        </option>
+        <option value="その他" {{ 'selected' if user.gender=='その他' else '' }}>その他
+        </option>
+        <option value="非公開" {{ 'selected' if user.gender=='非公開' else '' }}>非公開
+        </option>
+      </select>
+    </div>
+    <div class="field">
+      <label>言語</label>
+      <span id="languageText">{{ user.language }}</span>
+      <select name="language" id="languageInput">
+        <option value="">選択してください</option>
+        <option value="Python" {{ 'selected' if user.language=='Python' else '' }}>Python
+        </option>
+        <option value="Java" {{ 'selected' if user.language=='Java' else '' }}>Java
+        </option>
+        <option value="PHP" {{ 'selected' if user.language=='PHP' else '' }}>PHP
+        </option>
+        <option value="Ruby" {{ 'selected' if user.language=='Ruby' else '' }}>Ruby
+        </option>
+        <option value="c#" {{ 'selected' if user.language=='C#' else '' }}>C#
+        </option>
+      </select>
+    </div>
+    <div class="field">
+      <label>開発分野</label>
+      <span id="dev_fieldText">{{ user.dev_field }}</span>
+      <select name="dev_field" id="dev_fieldInput">
+        <option value="">選択してください</option>
+        <option value="Web開発" {{ 'selected' if user.dev_field=='Web開発' else '' }}>Web開発
+        </option>
+        <option value="モバイルアプリ" {{ 'selected' if user.dev_field=='モバイルアプリ' else '' }}>モバイルアプリ
+        </option>
+        <option value="AI / 機械学習"
+        {{ 'selected' if user.dev_field=='AI / 機械学習' else '' }}>AI / 機械学習
+      </option>
+      <option value="ゲーム開発" {{ 'selected' if user.dev_field=='ゲーム開発' else '' }}>ゲーム開発
+      </option>
+      <option value="組み込みシステム"
+      {{ 'selected' if user.dev_field=='組み込みシステム' else '' }}>組み込みシステム
+    </option>
+  </select>
+</div>
+<div class="field">
+  <label>学習歴</label>
+  <span id="experienceText">{{ user.experience }}</span>
+  <select name="experience" id="experienceInput">
+    <option value="">選択してください</option>
+    <option value="半年～1年" {{ 'selected' if user.experience=='半年～1年' else '' }}>半年～1年
+    </option>
+    <option value="1年～2年" {{ 'selected' if user.experience=='1年～2年' else '' }}>1年～2年
+    </option>
+    <option value="2年～5年" {{ 'selected' if user.experience=='2年～5年' else '' }}>2年～5年
+    </option>
+    <option value="5年以上" {{ 'selected' if user.experience=='5年以上' else '' }}>5年以上
+    </option>
+    <option value="10年以上" {{ 'selected' if user.experience=='10年以上' else '' }}>10年以上
+    </option>
+  </select>
+</div>
+<div class="field">
+  <label>自己紹介</label>
+  <span id="introductionText">{{ user.introduction }}</span>
+  <textarea name="introduction" id="introductionInput">{{ user.introduction }}</textarea>
+</div>
+<div class="buttons">
+  <button type="button" class="edit-btn" id="editBtn">編集する</button>
+  <button type="submit" class="save-btn" id="saveBtn">編集終了</button>
+  <button type="button" class="close-btn" id="closeBtn">戻る</button>
+</div>
+</form>
+</div>
+<script>
+  const fields = ["name", "gender", "language", "dev_field", "experience", "introduction"];
+
+  document.getElementById("editBtn").addEventListener("click", () => {
+    fields.forEach(id => {
+      document.getElementById(id + "Text").style.display = "none";
+      document.getElementById(id + "Input").style.display = "block";
+    });
+
+    document.getElementById("editBtn").style.display = "none";
+    document.getElementById("saveBtn").style.display = "inline-block";
+  });
+
+  function previewImage(event) {
+    const preview = document.getElementById("preview");
+    const icon = document.getElementById("defaultIcon");
+    const file = event.target.files[0];
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+      icon.style.display = "none";
+    }
+  }
+
+  document.getElementById("closeBtn").addEventListener("click", () => {
+    window.location.href = "/main?tab=recommend";
+  });
+
+  // 編集完了時 → 通常の form POST として送信
+  document.getElementById("profileForm").addEventListener("submit", function (e) {
+    // 通常送信するため、e.preventDefault() はしない
+    // → サーバー側に送られ、/my_profileのエンドポイントが処理
+  });
+
+</script>
+<footer>
+  &copy; 2025 CodeMate. All rights reserved.
+</footer>
+</body>
+</html>

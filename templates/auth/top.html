@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ログイン | WEBプログラマ・マッチングアプリ</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <header>
+      <!-- ↓ここにロゴ画像を入れる -->
+      <img
+        src="{{ url_for('static', filename='img/logo.png') }}"
+        alt="WEBプログラマ・マッチングアプリのロゴ"
+      />
+      <!-- ここにロゴ画像を入れる -->
+    </header>
+
+    <main>
+      <div class="login-box">
+        <h2>ログイン</h2>
+
+        {% if error %}
+        <p style="color: red; text-align: center">{{ error }}</p>
+        {% endif %}
+
+        <form action="{{ url_for('auth.top') }}" method="post">
+          <input
+            type="email"
+            name="email"
+            placeholder="メールアドレス"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="パスワード"
+            required
+          />
+          <input type="submit" value="ログイン" />
+        </form>
+
+        <form action="{{ url_for('auth.register') }}" method="get">
+          <button type="submit">新規登録</button>
+        </form>
+      </div>
+    </main>
+
+  <footer class="app-footer">
+  <div class="footer-center">© 2025 CodeMate. All rights reserved.</div>
+  <a href="{{ url_for('show_attention') }}" target="_blank" rel="noopener noreferrer" class="footer-terms-link">利用規約</a>
+</footer>
+
+
+  </body>
+</html>

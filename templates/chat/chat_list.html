@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チャットリスト</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="chat-header">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" />
+        <button class="exit-button" onclick="location.href='{{ url_for('main') }}'">
+            メインページへ
+        </button>
+    </header>
+    <div class="container">
+        <h1>チャットリスト</h1>
+        <ul>
+            {% for user in matched_users %}
+                <li><a href="{{ url_for('chat.chat_room', user_id=user.id) }}">{{ user.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

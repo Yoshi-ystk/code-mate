@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新規プロフィール登録 | WEBプログラマ・マッチングアプリ</title>
+
+    <!-- Font Awesome CDN for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+
+  <body>
+    <header>
+      <img
+        src="{{ url_for('static', filename='img/logo.png') }}"
+        alt="WEBプログラマ・マッチングアプリのロゴ"
+      />
+    </header>
+
+    <main>
+      <div class="form-box">
+        <h2>プロフィール登録</h2>
+
+        <form
+          id="profileForm"
+          action="/register_profile"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <!-- プロフィール画像 -->
+          <div class="profile-image-wrapper">
+            <label for="profilePic" class="profile-label">
+              <div class="profile-pic-preview">
+      <!-- 最初からデフォルト画像を表示 -->
+      <img
+        id="preview"
+        src="{{ url_for('static', filename='img/default.png') }}"
+        alt="プロフィール画像"
+      />
+      <!-- カメラアイコン -->
+                <i class="fas fa-camera camera-icon"></i>
+              </div>
+            </label>
+            <input
+              type="file"
+              id="profilePic"
+              name="image"
+              accept="image/*"
+              onchange="previewImage(event)"
+              style="display: none"
+            />
+          </div>
+
+          <!-- 入力項目 -->
+          <input type="text" name="name" placeholder="名前" required />
+
+          <select name="gender" required>
+            <option value="">性別を選択</option>
+            <option value="男性">男性</option>
+            <option value="女性">女性</option>
+            <option value="その他">その他</option>
+            <option value="非公開">非公開</option>
+          </select>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="メールアドレス"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="パスワード"
+            required
+          />
+
+          <select name="language" required>
+            <option value="">使用言語を選択</option>
+            <option value="Python">Python</option>
+            <option value="Java">Java</option>
+            <option value="PHP">PHP</option>
+            <option value="Ruby">Ruby</option>
+            <option value="C#">C#</option>
+          </select>
+
+          <select name="dev_field" required>
+            <option value="">開発分野を選択</option>
+            <option value="Web開発">Web開発</option>
+            <option value="モバイルアプリ">モバイルアプリ</option>
+            <option value="AI / 機械学習">AI / 機械学習</option>
+            <option value="ゲーム開発">ゲーム開発</option>
+            <option value="組み込みシステム">組み込みシステム</option>
+          </select>
+
+          <select name="experience" required>
+            <option value="">学習歴を選択</option>
+            <option value="半年～1年">半年～1年</option>
+            <option value="1年～2年">1年～2年</option>
+            <option value="2年～5年">2年～5年</option>
+            <option value="5年以上">5年以上</option>
+            <option value="10年以上">10年以上</option>
+          </select>
+
+          <textarea
+            name="introduction"
+            placeholder="自己紹介を入力してください"
+            required
+          ></textarea>
+
+          <input type="submit" value="登録する" />
+        </form>
+      </div>
+    </main>
+
+    <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
+
+    <!-- 登録完了ポップアップ -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popupMessage">新規登録が完了しました！</div>
+
+    <script>
+      // プロフィール画像プレビュー処理
+      function previewImage(event) {
+        const preview = document.getElementById("preview");
+        const icon = document.getElementById("defaultIcon");
+        const cameraIcon = document.querySelector(".camera-icon");
+        const file = event.target.files[0];
+        if (file) {
+          preview.src = URL.createObjectURL(file);
+          preview.style.display = "block";
+          icon.style.display = "none";
+          cameraIcon.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
