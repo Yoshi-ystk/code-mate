@@ -15,4 +15,6 @@ class User(db.Model):
     dev_field = db.Column(db.String(40))
     experience = db.Column(db.String(40))
     introduction = db.Column(db.Text)
-    image_path = db.Column(db.String(60), default="default.png")  # 7/29山本修正 jpg→png変更
+    image_path = db.Column(
+        db.String(60), default="default.png"
+    )  # 7/29山本修正 jpg→png変更

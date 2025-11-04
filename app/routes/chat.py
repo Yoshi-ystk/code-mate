@@ -11,6 +11,7 @@ chat_bp = Blueprint("chat", __name__)
 
 from app.models.user import User
 
+
 @chat_bp.route("/chat_list")
 @login_required
 def chat_list():
@@ -29,6 +30,7 @@ def chat_list():
     matched_users = User.query.filter(User.id.in_(matched_users_ids)).all()
 
     return render_template("chat/chat_list.html", matched_users=matched_users)
+
 
 @chat_bp.route("/chat/<int:user_id>")
 @login_required
@@ -65,10 +67,16 @@ def chat_room(user_id):
     ]
 
     return render_template(
-        "chat/chat.html", user_id=user_id, room_id=room_id, past_messages=past_messages, other_user=other_user
+        "chat/chat.html",
+        user_id=user_id,
+        room_id=room_id,
+        past_messages=past_messages,
+        other_user=other_user,
     )
 
+
 # --- Socket.IO イベントハンドラ ---
+
 
 @socketio.on("join")
 def on_join(data):
@@ -86,6 +94,7 @@ def on_leave(data):
     user_id = session.get("user_id")
     user = User.query.get(user_id)
     emit("status", {"msg": user.name + "さんが退室しました。"}, room=room)
+
 
 @socketio.on("message")
 def handle_message(data):

@@ -10,7 +10,10 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
   <body>
     <header>
@@ -22,25 +25,26 @@
         <!-- ▼ メインカラム -->
         <div class="col-lg-9">
           <!-- ▼ プロフィールカード一覧 -->
-          
-              <h3 class="recommended-heading text-center">
-  <i class="fas fa-star fa-beat text-warning me-2"></i>
-  < 🎵 あなたが送ったいいね一覧  >
-</h3>
-            <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+
+          <h3 class="recommended-heading text-center">
+            <i class="fas fa-star fa-beat text-warning me-2"></i>
+            < 🎵 あなたが送ったいいね一覧 >
+          </h3>
+          <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
             {% for user in like_sent %} {% include 'main/profile_card.html' %}
             {% else %}
-          
-            
+
             <div class="container my-4">
-  <div class="d-flex justify-content-center">
-    <div class="alert alert-light border text-center shadow-sm rounded py-4 w-100" style="max-width: 600px;">
-      <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
-      <strong>まだ送ったいいねは<br>ありません😢</strong>
-      
-    </div>
-  </div>
-</div>
+              <div class="d-flex justify-content-center">
+                <div
+                  class="alert alert-light border text-center shadow-sm rounded py-4 w-100"
+                  style="max-width: 600px"
+                >
+                  <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
+                  <strong>まだ送ったいいねは<br />ありません😢</strong>
+                </div>
+              </div>
+            </div>
             {% endfor %}
           </div>
         </div>

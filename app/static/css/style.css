@@ -8,20 +8,20 @@
 /* リセットCSS */
 html,
 body {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 main {
@@ -29,102 +29,108 @@ main {
 }
 
 header {
-	background-image: linear-gradient(90deg,
-			rgba(87, 188, 222, 1),
-			rgba(142, 84, 219, 1));
-	padding: 15px 20px;
-	text-align: center;
+  background-image: linear-gradient(
+    90deg,
+    rgba(87, 188, 222, 1),
+    rgba(142, 84, 219, 1)
+  );
+  padding: 15px 20px;
+  text-align: center;
 }
 
 header img {
-	height: 60px;
-	max-width: 90%;
+  height: 60px;
+  max-width: 90%;
 }
 
 footer {
-	background-image: linear-gradient(90deg,
-			rgba(87, 188, 222, 1),
-			rgba(142, 84, 219, 1));
-	color: white;
-	text-align: center;
-	padding: 15px 10px;
-	font-size: 0.9em;
-	margin-top: auto;
-	position: relative;
+  background-image: linear-gradient(
+    90deg,
+    rgba(87, 188, 222, 1),
+    rgba(142, 84, 219, 1)
+  );
+  color: white;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.9em;
+  margin-top: auto;
+  position: relative;
 }
 
 @media (max-width: 600px) {
-	header img {
-		height: 40px;
-	}
+  header img {
+    height: 40px;
+  }
 }
 
 /* ▼ 共通ユーティリティクラス */
 .is-hidden {
-	display: none;
+  display: none;
 }
 
 /* ==============================
     ▼ top.html 用CSS
    ============================== */
 main {
-	flex: 1;
-	margin: 0;
-	padding: 20px 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  flex: 1;
+  margin: 0;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-box {
-	background-color: white;
-	padding: 30px;
-	border-radius: 10px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-	width: 100%;
-	max-width: 400px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
 }
 
 .login-box h2 {
-	text-align: center;
-	margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-box input[type="email"],
 .login-box input[type="password"] {
-	width: 100%;
-	padding: 12px;
-	margin: 10px 0;
-	border: 1px solid #ccc;
-	border-radius: 6px;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .login-box input[type="submit"],
 .login-box button {
-	width: 100%;
-	padding: 12px;
-	margin-top: 15px;
-	background-color: #4f46e5;
-	color: white;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-weight: bold;
-	transition: background-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .login-box button {
-	background-color: #6b7280;
+  background-color: #6b7280;
 }
 
 .login-box input[type="submit"]:hover {
-	background-image: linear-gradient(90deg,
-			rgba(87, 188, 222, 1),
-			rgba(142, 84, 219, 1));
+  background-image: linear-gradient(
+    90deg,
+    rgba(87, 188, 222, 1),
+    rgba(142, 84, 219, 1)
+  );
 }
 
 .login-box button:hover {
-	background-color: #4b5563;
+  background-color: #4b5563;
 }
 
 /* ==============================
@@ -132,64 +138,61 @@ main {
    ============================== */
 
 .app-footer {
-	/*position: relative;*/
-	background-image: linear-gradient(90deg, #57bcde, #8e54db);
-	color: white;
-	text-align: center;
-	padding: 30px 10px 20px;
-	font-size: 0.9em;
-	box-sizing: border-box;
-	/*margin-top: auto;*/
+  /*position: relative;*/
+  background-image: linear-gradient(90deg, #57bcde, #8e54db);
+  color: white;
+  text-align: center;
+  padding: 30px 10px 20px;
+  font-size: 0.9em;
+  box-sizing: border-box;
+  /*margin-top: auto;*/
 }
 
 .app-footer .footer-center {
-	font-size: 0.95em;
+  font-size: 0.95em;
 }
 
 .footer-terms-link {
-	position: absolute;
-	bottom: 10px;
-	right: 16px;
-	font-size: 0.75em;
-	color: #ffffff;
-	text-decoration: none;
+  position: absolute;
+  bottom: 10px;
+  right: 16px;
+  font-size: 0.75em;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 .footer-terms-link:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
 /* レスポンシブ対応 */
 @media (max-width: 600px) {
-	.app-footer {
-		padding: 25px 8px 18px;
-		font-size: 0.85em;
-	}
+  .app-footer {
+    padding: 25px 8px 18px;
+    font-size: 0.85em;
+  }
 
-	.footer-terms-link {
-		font-size: 0.7em;
-		right: 8px;
-	}
+  .footer-terms-link {
+    font-size: 0.7em;
+    right: 8px;
+  }
 }
-
-
-
 
 /* ==============================
     ▼ register_profile.html 用CSS
    ============================== */
 .form-box {
-	background-color: white;
-	padding: 30px;
-	border-radius: 10px;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-	width: 90%;
-	max-width: 900px;
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 900px;
 }
 
 .form-box h2 {
-	text-align: center;
-	margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /*▼７/３０追加▼　*/
@@ -237,7 +240,7 @@ main {
 }
 
 /*▲７/３０追加*/
-/* 
+/*
 /* 入力項目の隙間統一 */
 .form-box label {
   margin-bottom: 6px;
@@ -250,28 +253,26 @@ main {
   margin-bottom: 20px;
 }
 
-
-
 .form-box textarea {
-	resize: vertical;
-	min-height: 100px;
+  resize: vertical;
+  min-height: 100px;
 }
 
 .form-box input[type="submit"] {
-	width: 100%;
-	padding: 12px;
-	background-color: #4f46e5;
-	color: white;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
-	font-weight: bold;
-	margin-top: 15px;
-	transition: background-color 0.3s;
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: background-color 0.3s;
 }
 
 .form-box input[type="submit"]:hover {
-	background-color: #4338ca;
+  background-color: #4338ca;
 }
 
 /* ▼ プロフィール画像アップロード */
@@ -288,87 +289,87 @@ main {
 }
 
 .profile-label {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .profile-pic-preview {
-	width: 120px;
-	height: 120px;
-	border-radius: 50%;
-	background-color: #e5e7eb;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	border: 2px solid #ccc;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid #ccc;
 }
 
 .profile-pic-preview img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .profile-icon {
-	color: #888;
+  color: #888;
 }
 
 .camera-icon {
-	position: absolute;
-	bottom: 5px;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: white;
-	color: #555;
-	border-radius: 50%;
-	padding: 5px;
-	font-size: 15px;
-	border: 1px solid #ccc;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #555;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* ▼ 登録完了ポップアップ */
 .popup {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background: white;
-	color: #333;
-	padding: 30px 40px;
-	border-radius: 10px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-	z-index: 1000;
-	display: none;
-	text-align: center;
-	font-size: 1.2em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: #333;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: none;
+  text-align: center;
+  font-size: 1.2em;
 }
 
 .popup.show {
-	display: block;
+  display: block;
 }
 
 .popup-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.4);
-	z-index: 999;
-	display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
 }
 
 .popup-overlay.show {
-	display: block;
+  display: block;
 }
 
 @media (max-width: 600px) {
-	.form-box {
-		padding: 20px;
-	}
+  .form-box {
+    padding: 20px;
+  }
 }
 
 /* ==============================
@@ -403,30 +404,29 @@ h3:after {
   width: 20%;
 }
 
-
 .filter-form {
-	margin: 20px 0;
+  margin: 20px 0;
 }
 
 .sidebar a {
-	display: block;
-	text-align: center;
-	padding: 10px;
-	border-radius: 6px;
-	font-weight: bold;
-	background-color: #f9f9ff;
-	color: #4f46e5;
-	text-decoration: none;
-	margin-bottom: 10px;
-	transition: 0.3s;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  background-color: #f9f9ff;
+  color: #4f46e5;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
-	background: linear-gradient(90deg, #57bcde, #8e54db);
-	color: white;
+  background: linear-gradient(90deg, #57bcde, #8e54db);
+  color: white;
 }
 
- /* ベル通知ボタン */
+/* ベル通知ボタン */
 
 .bell {
   display: none;
@@ -436,98 +436,96 @@ h3:after {
   vertical-align: middle;
 }
 
-
 /* ==============================
     ▼ user_profile.html 用CSS
    ============================== */
 .profile-card {
-	position: relative;
-	border-radius: 12px;
-	overflow: hidden;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .favorite-btn {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	font-size: 2rem;
-	color: #ccc;
-	cursor: pointer;
-	transition: color 0.3s ease;
-	z-index: 10;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 2rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 10;
 }
 
 .favorite-btn.active {
-	color: gold;
+  color: gold;
 }
 
 .card-body h4 {
-	font-weight: bold;
-	margin-bottom: 15px;
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .list-group-item strong {
-	display: inline-block;
-	width: 90px;
+  display: inline-block;
+  width: 90px;
 }
 
 .close-bottom {
-	text-align: center;
-	margin-top: 20px;
-	margin-bottom: 10px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .close-bottom button {
-	border: none;
-	background-color: #4f46e5;
-	/* 濃い青系背景 */
-	color: white;
-	padding: 8px 16px;
-	border-radius: 6px;
-	font-size: 1.2rem;
-	cursor: pointer;
-	transition: background-color 0.3s;
+  border: none;
+  background-color: #4f46e5;
+  /* 濃い青系背景 */
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .close-bottom button:hover {
-	background-color: #4338ca;
+  background-color: #4338ca;
 }
 
 @media (max-width: 576px) {
-	.card-body h4 {
-		font-size: 1.2rem;
-	}
+  .card-body h4 {
+    font-size: 1.2rem;
+  }
 
-	.favorite-btn {
-  font-size: 1.5rem;
-  /*color: #ccc; /* 灰色 */
-  cursor: pointer;
-  transition: color 0.3s;
-}*/
+  .favorite-btn {
+    font-size: 1.5rem;
+    /*color: #ccc; /* 灰色 */
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  */ .favorite-btn.active {
+    color: gold; /* 黄色 */
+  }
 
-.favorite-btn.active {
-  color: gold; /* 黄色 */
-	}
+  .list-group-item strong {
+    width: 80px;
+  }
 
-	.list-group-item strong {
-		width: 80px;
-	}
-
-	.close-bottom button {
-		font-size: 1.3rem;
-	}
+  .close-bottom button {
+    font-size: 1.3rem;
+  }
 }
 
 .container {
-	max-width: 800px;
-	margin: 0 auto;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .card-img-top {
-	width: 100%;
-	height: auto;
-	object-fit: cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 /* ==============================
@@ -536,8 +534,8 @@ h3:after {
 
 /* プロフィール表示用コンテナ */
 .container-pr {
-  width: 50%;         /* 70%にして幅少し狭く */
-  max-width: 900px;  /* 最大幅も1200pxまで */
+  width: 50%; /* 70%にして幅少し狭く */
+  max-width: 900px; /* 最大幅も1200pxまで */
   margin: 40px auto;
   padding: 30px;
   background-color: #fff;
@@ -547,68 +545,68 @@ h3:after {
 
 /* 見出し */
 h2 {
-	text-align: center;
-	margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 /* プロフィール画像 */
 .profile-image-wrapper {
-	display: flex;
-	justify-content: center;
-	margin-bottom: 20px;
-	position: relative;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .profile-pic-preview {
-	width: 150px;
-	/* register_profile.html の120pxより少し大きい */
-	height: 150px;
-	border-radius: 50%;
-	background-color: #e5e7eb;
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	border: 3px solid #ccc;
+  width: 150px;
+  /* register_profile.html の120pxより少し大きい */
+  height: 150px;
+  border-radius: 50%;
+  background-color: #e5e7eb;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid #ccc;
 }
 
 .profile-pic-preview img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-	border-radius: 50%;
-	display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: none;
 }
 
 .profile-icon {
-	color: #888;
-	font-size: 80px;
+  color: #888;
+  font-size: 80px;
 }
 
 .camera-icon {
-	position: absolute;
-	bottom: 5px;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: white;
-	color: #555;
-	border-radius: 50%;
-	padding: 6px;
-	font-size: 15px;
-	border: 1px solid #ccc;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  color: #555;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 各フィールド表示用 */
 .field {
-	margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .field label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 /* ７/３０追加 */
@@ -625,17 +623,17 @@ h2 {
 .field input,
 .field select,
 .field textarea {
-	width: 100%;
-	padding: 10px;
-	font-size: 1em;
-	border: 1px solid #ccc;
-	border-radius: 6px;
-	display: none;
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  display: none;
 }
 
 .field textarea {
-	resize: vertical;
-	min-height: 100px;
+  resize: vertical;
+  min-height: 100px;
 }
 
 /* ７/３０入力追加 */
@@ -675,68 +673,67 @@ textarea {
   transition: box-shadow 0.3s ease, border 0.3s ease;
 }
 
- /*７/３０入力追加 */
-
+/*７/３０入力追加 */
 
 /* 編集・保存ボタン */
 .buttons {
-	text-align: center;
-	margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .buttons button {
-	padding: 10px 20px;
-	margin: 0 10px;
-	font-weight: bold;
-	border: none;
-	border-radius: 6px;
-	cursor: pointer;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .edit-btn {
-	background-color: #4f46e5;
-	color: #fff;
+  background-color: #4f46e5;
+  color: #fff;
 }
 
 .save-btn {
-	background-color: #00b894;
-	color: #fff;
-	display: none;
+  background-color: #00b894;
+  color: #fff;
+  display: none;
 }
 
 .close-btn {
-	background-color: #ccc;
-	color: #333;
+  background-color: #ccc;
+  color: #333;
 }
 
 /* ポップアップ */
 .popup,
 .popup-overlay {
-	display: none;
-	position: fixed;
-	z-index: 9999;
+  display: none;
+  position: fixed;
+  z-index: 9999;
 }
 
 .popup-overlay.show {
-	display: block;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.4);
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .popup.show {
-	display: block;
-	background: #fff;
-	padding: 30px 40px;
-	border-radius: 10px;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
-	font-size: 1.2em;
+  display: block;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 1.2em;
 }
 
 /* レスポンシブ対応 */
@@ -750,7 +747,7 @@ textarea {
 @media (min-width: 1024px) {
   .container-pr {
     max-width: 1200px;
-    margin: 0 auto;  /* ←中央寄せ */
+    margin: 0 auto; /* ←中央寄せ */
   }
 }
 
@@ -777,8 +774,6 @@ textarea {
 .chat-header .logo {
   height: 30px;
 }
-
-
 
 .chat-header .exit-button {
   background-color: #4338ca;
@@ -815,7 +810,6 @@ textarea {
   z-index: 1;
 }
 
-
 /* メッセージリスト */
 .message-list {
   list-style: none;
@@ -840,7 +834,7 @@ textarea {
   display: flex;
   padding: 10px 16px;
   background: white;
-  box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.1);
   z-index: 999;
   box-sizing: border-box;
 }
@@ -910,174 +904,170 @@ textarea {
 }
 
 /* ==============================
-  	▼ contact.html 
+  	▼ contact.html
    ============================== */
 
 .contact-title {
-	text-align: center;
+  text-align: center;
 }
 
 .contact-form h2 {
-	text-align: center;
-	margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .contact-textarea {
-	width: 100%;
-	padding: 12px;
-	margin: 10px 0;
-	border: 1px solid #ccc;
-	border-radius: 6px;
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .contact-form {
-	max-width: 600px;
-	margin: 0 auto;
-	padding: 20px;
-	background-color: #fff;
-	border-radius: 12px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-label {
-	display: block;
-	margin-bottom: 5px;
-	text-align: center;
+  display: block;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .contact-submit {
-	text-align: center;
-	margin-top: 20px;
-	margin-bottom: 10px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .contact-submit button {
-	border: none;
-	background-color: #191d85;
-	color: white;
-	padding: 20px 50px;
-	font-size: 1.2rem;
-	cursor: pointer;
-	transition: background-color 0.3s;
+  border: none;
+  background-color: #191d85;
+  color: white;
+  padding: 20px 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .contact-submit button:hover {
-	background-color: #2f3dba;
+  background-color: #2f3dba;
 }
 
 /* ==============================
    ▼ attention.html 用
    ============================== */
 
-
 .terms-body {
-	font-family: "Helvetica Neue", sans-serif;
-	margin: 0;
-	padding: 0px;
-	background: #f8f9fa;
-	color: #333;
-	line-height: 1.7;
+  font-family: "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0px;
+  background: #f8f9fa;
+  color: #333;
+  line-height: 1.7;
 }
 
 .terms-container {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 .terms-title {
-	font-size: 1.3em;
-	color: #dc143c;
-	margin-bottom: 0.8em;
-	text-align: center;
+  font-size: 1.3em;
+  color: #dc143c;
+  margin-bottom: 0.8em;
+  text-align: center;
 }
 
 /* 見出し */
 .terms-section-title {
-	font-size: 1.05em;
-	margin-top: 1.5em;
-	margin-left: 0;
-	/* 左寄せ */
-	text-align: left;
-	/* 左寄せ */
-	border-bottom: 1px solid #ccc;
-	padding-bottom: 0.3em;
-	font-weight: bold;
+  font-size: 1.05em;
+  margin-top: 1.5em;
+  margin-left: 0;
+  /* 左寄せ */
+  text-align: left;
+  /* 左寄せ */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.3em;
+  font-weight: bold;
 }
 
-
-
 .terms-paragraph {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 
 .terms-list {
-	padding-left: 1.5em;
-	margin-bottom: 1em;
+  padding-left: 1.5em;
+  margin-bottom: 1em;
 }
 
 .terms-list li {
-	margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .terms-date,
 .terms-company {
-	text-align: right;
-	margin-top: 40px;
-	font-weight: bold;
+  text-align: right;
+  margin-top: 40px;
+  font-weight: bold;
 }
 
 .terms-close-button-wrapper {
-	text-align: center;
-	margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .terms-close-button {
-	background-color: #4f46e5;
-	color: white;
-	border: none;
-	padding: 12px 24px;
-	font-size: 1rem;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: background-color 0.3s;
-
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .terms-close-button:hover {
-	background-color: #3730a3;
+  background-color: #3730a3;
 }
 
 @media (max-width: 600px) {
-	.terms-body {
-		padding: 15px;
-	}
+  .terms-body {
+    padding: 15px;
+  }
 
-	.terms-title {
-		font-size: 1.5em;
-	}
+  .terms-title {
+    font-size: 1.5em;
+  }
 
-	.terms-close-button {
-		width: 100%;
-	}
+  .terms-close-button {
+    width: 100%;
+  }
 }
 
 html,
 body,
 header,
 main {
-	margin: 0 !important;
-	padding: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 /* ==============================
    ▼ プロフィール画像の丸くするクラス
    ============================== */
- 
+
 .profile-img-circle {
-  width: 120px;           /* 調整可能 */
+  width: 120px; /* 調整可能 */
   height: 120px;
-  object-fit: cover;       /* はみ出し防止 */
-  border-radius: 50%;      /* 丸くする */
-  border: 2px solid #ccc;  /* オプション：枠線 */
-  margin: 10px auto;       /* 中央寄せ */
-  display: block;          /* ブロック化 */
+  object-fit: cover; /* はみ出し防止 */
+  border-radius: 50%; /* 丸くする */
+  border: 2px solid #ccc; /* オプション：枠線 */
+  margin: 10px auto; /* 中央寄せ */
+  display: block; /* ブロック化 */
 }

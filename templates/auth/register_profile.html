@@ -10,7 +10,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
 
   <body>
@@ -35,13 +38,13 @@
           <div class="profile-image-wrapper">
             <label for="profilePic" class="profile-label">
               <div class="profile-pic-preview">
-      <!-- 最初からデフォルト画像を表示 -->
-      <img
-        id="preview"
-        src="{{ url_for('static', filename='img/default.png') }}"
-        alt="プロフィール画像"
-      />
-      <!-- カメラアイコン -->
+                <!-- 最初からデフォルト画像を表示 -->
+                <img
+                  id="preview"
+                  src="{{ url_for('static', filename='img/default.png') }}"
+                  alt="プロフィール画像"
+                />
+                <!-- カメラアイコン -->
                 <i class="fas fa-camera camera-icon"></i>
               </div>
             </label>

@@ -1,5 +1,6 @@
 from app.models import db
 
+
 # いいねとマッチした人を管理する、likesテーブル定義
 class Likes(db.Model):
     __tablename__ = "likes"

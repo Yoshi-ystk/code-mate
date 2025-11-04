@@ -1,10 +1,19 @@
-from flask import Blueprint, render_template, request, redirect, session, current_app, url_for
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    redirect,
+    session,
+    current_app,
+    url_for,
+)
 import os
 from werkzeug.utils import secure_filename
 from app.models.user import User, db
 
 # Blueprint定義は最初に
 profile_bp = Blueprint("profile", __name__, template_folder="../../templates")
+
 
 # マイページ表示 & 編集（同じURLでGETとPOSTを処理）
 @profile_bp.route("/my_profile", methods=["GET", "POST"])
@@ -31,12 +40,16 @@ def edit_profile():
             filename = secure_filename(image.filename)
 
             # ユーザー専用フォルダ作成
-            user_folder = os.path.join(current_app.config["UPLOAD_FOLDER"], str(user.id))
+            user_folder = os.path.join(
+                current_app.config["UPLOAD_FOLDER"], str(user.id)
+            )
             os.makedirs(user_folder, exist_ok=True)
 
             # 古い画像削除
             if user.image_path:
-                old_image_path = os.path.join(current_app.static_folder, user.image_path)
+                old_image_path = os.path.join(
+                    current_app.static_folder, user.image_path
+                )
                 if os.path.exists(old_image_path):
                     os.remove(old_image_path)
 
@@ -55,4 +68,3 @@ def edit_profile():
     # GET時：テンプレートにユーザー情報を渡す
     print(f"DEBUG (GET): user.image_path before rendering: {user.image_path}")
     return render_template("profile/my_profile.html", user=user)
-

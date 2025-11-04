@@ -2,12 +2,15 @@ from flask import Blueprint, request, render_template, session
 from app.models.user import User
 from sqlalchemy import or_
 
-profile_search_bp = Blueprint('profile_search', __name__, template_folder='../../templates')
+profile_search_bp = Blueprint(
+    "profile_search", __name__, template_folder="../../templates"
+)
 
-@profile_search_bp.route('/search')
+
+@profile_search_bp.route("/search")
 def search():
-    language = request.args.get('language')
-    dev_field = request.args.get('dev_field')
+    language = request.args.get("language")
+    dev_field = request.args.get("dev_field")
 
     query = User.query
 
@@ -23,4 +26,4 @@ def search():
 
     results = query.all()
 
-    return render_template('main/profile_search.html', profiles=results)
+    return render_template("main/profile_search.html", profiles=results)

@@ -1,113 +1,123 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <title>チャットルーム</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <!-- <link rel="stylesheet" href="../../static/css/style2.css" /> -->
-	<link rel="stylesheet" href="../static/css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-</head>
-<body>
-
-  <!-- ▼ ヘッダー -->
-  <header class="chat-header">
-      <img src="{{ url_for('static', filename='img/logo_chat.png') }}" alt="ロゴ" class="logo" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>チャットルーム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="../../static/css/style2.css" /> -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+  </head>
+  <body>
+    <!-- ▼ ヘッダー -->
+    <header class="chat-header">
+      <img
+        src="{{ url_for('static', filename='img/logo_chat.png') }}"
+        alt="ロゴ"
+        class="logo"
+      />
       <img
         src="{{ url_for('static', filename='img/logo_chat.png') }}"
         alt="バナー"
         class="logo-chat-banner"
       />
-      <button class="exit-button" onclick="location.href='{{ url_for('main') }}'"> <!-- エラー波線が出ても問題なし -->
+      <button
+        class="exit-button"
+        <button
+        class="exit-button"
+        onclick="location.href='/main'"
+      >
+        >
+        <!-- エラー波線が出ても問題なし -->
         退出
       </button>
-  </header>
+    </header>
 
-  <!-- ▼ メッセージ表示エリア -->
-  <main class="chat-main">
-    <ul id="messages" class="message-list"></ul>
-  </main>
+    <!-- ▼ メッセージ表示エリア -->
+    <main class="chat-main">
+      <ul id="messages" class="message-list"></ul>
+    </main>
 
-  <!-- ▼ メッセージ入力フォーム -->
-  <form id="form" class="chat-form" action="">
+    <!-- ▼ メッセージ入力フォーム -->
+    <form id="form" class="chat-form" action="">
       <input
         id="input"
         class="chat-input"
         autocomplete="off"
         placeholder="メッセージを入力..."
       />
-    <button class="chat-send-btn" type="submit">送信</button>
-  </form>
+      <button class="chat-send-btn" type="submit">送信</button>
+    </form>
 
-  <!-- ▼ フッター -->
-  <footer class="chat-footer">
-    &copy; 2025 CodeMate. All rights reserved.
-  </footer>
+    <!-- ▼ フッター -->
+    <footer class="chat-footer">
+      &copy; 2025 CodeMate. All rights reserved.
+    </footer>
 
-  <!-- ▼ Socket.IO イベント処理 -->
+    <!-- ▼ Socket.IO イベント処理 -->
     <script id="past-messages-data" type="application/json">
       {{ past_messages | tojson | safe }}
     </script>
-  <script>
+    <script>
       document.addEventListener("DOMContentLoaded", () => {
         const socket = io.connect(
           location.protocol + "//" + document.domain + ":" + location.port
         );
-      const room = "{{ room_id }}";
+        const room = "{{ room_id }}";
 
         socket.on("connect", function () {
           socket.emit("join", { room: room });
-      });
+        });
 
         socket.on("status", function (data) {
           const item = document.createElement("li");
-        item.textContent = data.msg;
+          item.textContent = data.msg;
           document.getElementById("messages").appendChild(item);
-      });
+        });
 
         socket.on("message", function (data) {
           const item = document.createElement("li");
-        if (data.sender_id == "{{ session.get('user_id') }}") {
-          item.textContent = `${data.msg}`;
+          if (data.sender_id == "{{ session.get('user_id') }}") {
+            item.textContent = `${data.msg}`;
             item.classList.add("my-message");
-        } else {
-          item.innerHTML = `<div class="other-user-name">{{ other_user.name }}さん</div><div>${data.msg}</div>`;
+          } else {
+            item.innerHTML = `<div class="other-user-name">{{ other_user.name }}さん</div><div>${data.msg}</div>`;
             item.classList.add("other-message");
-        }
+          }
           document.getElementById("messages").appendChild(item);
-      });
+        });
 
         document
           .getElementById("form")
           .addEventListener("submit", function (e) {
-        e.preventDefault();
+            e.preventDefault();
             const msg = document.getElementById("input").value;
             if (msg.trim() !== "") {
               socket.emit("message", { room: room, message: msg });
               document.getElementById("input").value = "";
-        }
-      });
+            }
+          });
 
-      // 過去のメッセージ表示
+        // 過去のメッセージ表示
         const pastMessagesDataElement =
           document.getElementById("past-messages-data");
         if (pastMessagesDataElement) {
           const past_messages = JSON.parse(pastMessagesDataElement.textContent);
           if (past_messages) {
-      past_messages.forEach(function (msg) {
+            past_messages.forEach(function (msg) {
               const item = document.createElement("li");
-        if (msg.sender_id == "{{ session.get('user_id') }}") {
-          item.textContent = `${msg.message}`;
+              if (msg.sender_id == "{{ session.get('user_id') }}") {
+                item.textContent = `${msg.message}`;
                 item.classList.add("my-message");
-        } else {
-          item.innerHTML = `<div class="other-user-name">{{ other_user.name }}さん</div><div>${msg.message}</div>`;
+              } else {
+                item.innerHTML = `<div class="other-user-name">{{ other_user.name }}さん</div><div>${msg.message}</div>`;
                 item.classList.add("other-message");
-        }
+              }
               document.getElementById("messages").appendChild(item);
-      });
+            });
           }
         }
-    });
-  </script>
-</body>
+      });
+    </script>
+  </body>
 </html>

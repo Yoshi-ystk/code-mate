@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ログイン | WEBプログラマ・マッチングアプリ</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
   <body>
     <header>
@@ -47,11 +50,15 @@
       </div>
     </main>
 
-  <footer class="app-footer">
-  <div class="footer-center">© 2025 CodeMate. All rights reserved.</div>
-  <a href="{{ url_for('show_attention') }}" target="_blank" rel="noopener noreferrer" class="footer-terms-link">利用規約</a>
-</footer>
-
-
+    <footer class="app-footer">
+      <div class="footer-center">© 2025 CodeMate. All rights reserved.</div>
+      <a
+        href="{{ url_for('show_attention') }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-terms-link"
+        >利用規約</a
+      >
+    </footer>
   </body>
 </html>

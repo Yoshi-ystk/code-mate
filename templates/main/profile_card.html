@@ -5,9 +5,9 @@
   >
     <div class="card h-100">
       <img
-      src="{{ url_for('static', filename=(user.image_path if user.image_path.startswith('uploads/') else 'img/default.png')) }}"
+        src="{{ url_for('static', filename=(user.image_path if user.image_path.startswith('uploads/') else 'img/default.png')) }}"
         alt="{{ user.name }}"
-      class="profile-img-circle" 
+        class="profile-img-circle"
       />
       <div class="card-body text-center">
         <h5 class="card-title">{{ user.name }}</h5>

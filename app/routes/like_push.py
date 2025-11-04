@@ -5,6 +5,7 @@ from app.models.likes import Likes, db
 # Blueprint定義
 like_push_bp = Blueprint("like_push", __name__)
 
+
 # ==========================================
 # ① いいね送信API
 # ==========================================
@@ -21,7 +22,9 @@ def like_push(user_id):
     current_user_id = session["user_id"]
 
     # 相手が先に自分にLikeしているかチェック
-    reverse_like = Likes.query.filter_by(from_user=user_id, to_user=current_user_id).first()
+    reverse_like = Likes.query.filter_by(
+        from_user=user_id, to_user=current_user_id
+    ).first()
 
     matched_flag = False
     if reverse_like and not reverse_like.matched:
@@ -30,16 +33,15 @@ def like_push(user_id):
         reverse_like.is_read = False  # ✅ マッチしたら相手に未読通知
 
     # 自分の「いいね」を登録（重複チェック）
-    existing_like = Likes.query.filter_by(from_user=current_user_id, to_user=user_id).first()
+    existing_like = Likes.query.filter_by(
+        from_user=current_user_id, to_user=user_id
+    ).first()
     if existing_like:
         return jsonify({"message": "すでにいいねしています"}), 200
 
     # ✅ 新しいいいねは必ず未読
     new_like = Likes(
-        from_user=current_user_id,
-        to_user=user_id,
-        matched=matched_flag,
-        is_read=False
+        from_user=current_user_id, to_user=user_id, matched=matched_flag, is_read=False
     )
     db.session.add(new_like)
     db.session.commit()
@@ -62,22 +64,21 @@ def notifications():
 
     user_id = session["user_id"]
     # ✅ マッチ成立の未読通知
-    match_unread = Likes.query.filter(
-        Likes.matched == True,
-        Likes.to_user == user_id,
-        Likes.is_read == False
-    ).count() > 0
+    match_unread = (
+        Likes.query.filter(
+            Likes.matched == True, Likes.to_user == user_id, Likes.is_read == False
+        ).count()
+        > 0
+    )
     # ✅ 「いいねされた」未読通知（ただしまだマッチしていない）
-    got_liked_unread = Likes.query.filter(
-        Likes.to_user == user_id,
-        Likes.matched == False,
-        Likes.is_read == False
-    ).count() > 0
+    got_liked_unread = (
+        Likes.query.filter(
+            Likes.to_user == user_id, Likes.matched == False, Likes.is_read == False
+        ).count()
+        > 0
+    )
 
-    return jsonify({
-        "match": match_unread,
-        "got_liked": got_liked_unread
-    })
+    return jsonify({"match": match_unread, "got_liked": got_liked_unread})
 
 
 # ==========================================
@@ -98,17 +99,15 @@ def mark_read():
     user_id = session["user_id"]
 
     if notif_type == "match":
-        # ✅ マッチ通知を既読化 
-        Likes.query.filter(
-            Likes.matched == True,
-            Likes.to_user == user_id
-        ).update({"is_read": True})
+        # ✅ マッチ通知を既読化
+        Likes.query.filter(Likes.matched == True, Likes.to_user == user_id).update(
+            {"is_read": True}
+        )
     elif notif_type == "got_liked":
         # ✅ いいね通知を既読化（まだマッチしていないもの）
-        Likes.query.filter(
-            Likes.to_user == user_id,
-            Likes.matched == False
-        ).update({"is_read": True})
+        Likes.query.filter(Likes.to_user == user_id, Likes.matched == False).update(
+            {"is_read": True}
+        )
 
     db.session.commit()
     return jsonify({"message": "既読にしました"})
