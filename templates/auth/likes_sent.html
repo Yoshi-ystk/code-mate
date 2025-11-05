@@ -1,70 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>送ったいいね一覧 | WEBプログラマ・マッチングアプリ</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>送ったいいね一覧 | WEBプログラマ・マッチングアプリ</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    <header>
-      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" />
-    </header>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    </head>
+    <body>
+        <header>
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="ロゴ" />
+        </header>
 
-    <div class="container-fluid mt-4">
-      <div class="row">
-        <!-- ▼ メインカラム -->
-        <div class="col-lg-9">
-          <!-- ▼ プロフィールカード一覧 -->
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <!-- ▼ メインカラム -->
+                <div class="col-lg-9">
+                    <!-- ▼ プロフィールカード一覧 -->
 
-          <h3 class="recommended-heading text-center">
-            <i class="fas fa-star fa-beat text-warning me-2"></i>
-            < 🎵 あなたが送ったいいね一覧 >
-          </h3>
-          <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-            {% for user in like_sent %} {% include 'main/profile_card.html' %}
-            {% else %}
-
-            <div class="container my-4">
-              <div class="d-flex justify-content-center">
-                <div
-                  class="alert alert-light border text-center shadow-sm rounded py-4 w-100"
-                  style="max-width: 600px"
-                >
-                  <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
-                  <strong>まだ送ったいいねは<br />ありません😢</strong>
+                    <h3 class="recommended-heading text-center">
+                        <i class="fas fa-star fa-beat text-warning me-2"></i>
+                        < 🎵 あなたが送ったいいね一覧 >
+                    </h3>
+                    <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+                        {% for user in like_sent %}
+                            {% include 'main/profile_card.html' %}
+                        {% else %}
+                            <div class="container my-4">
+                                <div class="d-flex justify-content-center">
+                                    <div class="alert alert-light border text-center shadow-sm rounded py-4 w-100" style="max-width: 600px">
+                                        <i class="fas fa-user-slash fa-lg text-secondary me-2"></i>
+                                        <strong>まだ送ったいいねは<br />ありません😢</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-              </div>
+
+                <!-- ▼ サイドバー -->
+                <div class="col-lg-3 sidebar mt-4 mt-lg-0">
+                    <a href="/main?tab=recommend">ホーム</a>
+                    <a href="/my_profile">マイページ</a>
+                    <a href="/matched">マッチした人</a>
+                    <a href="/likes/sent">送ったいいね</a>
+                    <a href="/likes/received">もらったいいね</a>
+                    <a href="/contact">お問い合わせ</a>
+                    <a href="/logout">ログアウト</a>
+                </div>
             </div>
-            {% endfor %}
-          </div>
         </div>
 
-        <!-- ▼ サイドバー -->
-        <div class="col-lg-3 sidebar mt-4 mt-lg-0">
-          <a href="/main?tab=recommend">ホーム</a>
-          <a href="/my_profile">マイページ</a>
-          <a href="/matched">マッチした人</a>
-          <a href="/likes/sent">送ったいいね</a>
-          <a href="/likes/received">もらったいいね</a>
-          <a href="/contact">お問い合わせ</a>
-          <a href="/logout">ログアウト</a>
-        </div>
-      </div>
-    </div>
+        <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
 
-    <footer>&copy; 2025 CodeMate. All rights reserved.</footer>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>

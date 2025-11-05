@@ -1,78 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ user.name }}さんのプロフィール</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{ user.name }}さんのプロフィール</title>
 
-    <!-- Bootstrap -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body>
-    <div class="container py-4">
-      <div class="row justify-content-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-8">
-          <!--   <div class="col-12 col-sm-10 col-md-8 col-lg-6">  -->
-          <div class="card profile-card bg-white">
-            <!-- 星のお気に入りボタン -->
-            <span
-              class="favorite-btn {% if liked %}active{% endif %}"
-              id="favoriteBtn"
-              onclick="toggleFavorite()"
-              >★</span
-            >
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    </head>
+    <body>
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8 col-lg-8">
+                    <!--   <div class="col-12 col-sm-10 col-md-8 col-lg-6">  -->
+                    <div class="card profile-card bg-white">
+                        <!-- 星のお気に入りボタン -->
+                        <span class="favorite-btn {% if liked %}active{% endif %}" id="favoriteBtn" onclick="toggleFavorite()">★</span>
 
-            <!-- 画像 -->
-            <img
-              src="{{ url_for('static', filename=user.image_path if user.image_path.startswith('uploads/') else 'img/default.png') }}"
-              alt="{{ user.name }}"
-              class="profile-img-circle"
-            />
+                        <!-- 画像 -->
+                        <img
+                            src="{{ url_for('static', filename=user.image_path if user.image_path.startswith('uploads/') else 'img/default.png') }}"
+                            alt="{{ user.name }}"
+                            class="profile-img-circle"
+                        />
 
-            <!-- プロフィール情報 -->
-            <div class="card-body">
-              <h4 class="card-title text-center">{{ user.name }} さん</h4>
+                        <!-- プロフィール情報 -->
+                        <div class="card-body">
+                            <h4 class="card-title text-center">{{ user.name }} さん</h4>
 
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <strong>性別:</strong> {{ user.gender or '未設定' }}
-                </li>
-                <li class="list-group-item">
-                  <strong>言語:</strong> {{ user.language }}
-                </li>
-                <li class="list-group-item">
-                  <strong>開発分野:</strong> {{ user.dev_field }}
-                </li>
-                <li class="list-group-item">
-                  <strong>学習歴:</strong> {{ user.experience or '非公開' }}
-                </li>
-                <li class="list-group-item">
-                  <strong>自己紹介:</strong><br />{{ user.introduction or
-                  'まだ自己紹介がありません。' }}
-                </li>
-              </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>性別:</strong> {{ user.gender or '未設定' }}</li>
+                                <li class="list-group-item"><strong>言語:</strong> {{ user.language }}</li>
+                                <li class="list-group-item"><strong>開発分野:</strong> {{ user.dev_field }}</li>
+                                <li class="list-group-item"><strong>学習歴:</strong> {{ user.experience or '非公開' }}</li>
+                                <li class="list-group-item">
+                                    <strong>自己紹介:</strong><br />{{
+                                        user.introduction or
+                                        'まだ自己紹介がありません。'
+                                    }}
+                                </li>
+                            </ul>
 
-              <!-- ▼ 閉じるボタンをカードの下中央に -->
-              <div class="close-bottom">
-                <button onclick="window.location.replace(document.referrer)">
-                  × 閉じる
-                </button>
-              </div>
+                            <!-- ▼ 閉じるボタンをカードの下中央に -->
+                            <div class="close-bottom">
+                                <button onclick="window.location.replace(document.referrer)">× 閉じる</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- JS：お気に入りボタン制御 -->
-    <!--
+        <!-- JS：お気に入りボタン制御 -->
+        <!--
   <script>
     function toggleFavorite() {
       const btn = document.getElementById("favoriteBtn");
@@ -84,61 +65,57 @@
     }
   </script>
 	-->
-    <!-- JSのtoggleFavorite()内で、相手ユーザーのID（user.id）を使ってPOSTリクエストを送ります -->
-    <!--  {{ user.id }} がテンプレートで正しく渡っていることが前提 -->
+        <!-- JSのtoggleFavorite()内で、相手ユーザーのID（user.id）を使ってPOSTリクエストを送ります -->
+        <!--  {{ user.id }} がテンプレートで正しく渡っていることが前提 -->
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-      crossorigin="anonymous"
-    ></script>
-    <script>
-      function toggleFavorite() {
-        const btn = document.getElementById("favoriteBtn");
-        btn.classList.toggle("active");
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            function toggleFavorite() {
+                const btn = document.getElementById("favoriteBtn");
+                btn.classList.toggle("active");
 
-        // Flaskに通知用のPOSTリクエストを送信
-        fetch("/favorite/{{ user.id }}", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            target_user_id: "{{ user.id }}",
-          }),
-        })
-          .then((response) => {
-            if (!response.ok) throw new Error("リクエスト失敗");
-            return response.json();
-          })
-          .then((data) => {
-            console.log("通知が送信されました:", data.message);
-            if (data.matched) {
-              const modal = new bootstrap.Modal(
-                document.getElementById("matchModal")
-              );
-              modal.show();
+                // Flaskに通知用のPOSTリクエストを送信
+                fetch("/favorite/{{ user.id }}", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        target_user_id: "{{ user.id }}",
+                    }),
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error("リクエスト失敗");
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("通知が送信されました:", data.message);
+                        if (data.matched) {
+                            const modal = new bootstrap.Modal(document.getElementById("matchModal"));
+                            modal.show();
+                        }
+                    })
+                    .catch(error => {
+                        console.error("通知送信エラー:", error);
+                    });
             }
-          })
-          .catch((error) => {
-            console.error("通知送信エラー:", error);
-          });
-      }
-    </script>
+        </script>
 
-    <!-- JSのtoggleFavorite()内で、相手ユーザーのID（user.id）を使ってPOSTリクエストを送ります -->
-    <div class="modal fade" id="matchModal" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content text-center">
-          <div class="modal-body">
-            <h5>🎉 マッチしました！</h5>
-            <p>メッセージを送ってみましょう！</p>
-            <button class="btn btn-primary" data-bs-dismiss="modal">
-              閉じる
-            </button>
-          </div>
+        <!-- JSのtoggleFavorite()内で、相手ユーザーのID（user.id）を使ってPOSTリクエストを送ります -->
+        <div class="modal fade" id="matchModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content text-center">
+                    <div class="modal-body">
+                        <h5>🎉 マッチしました！</h5>
+                        <p>メッセージを送ってみましょう！</p>
+                        <button class="btn btn-primary" data-bs-dismiss="modal">閉じる</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 </html>

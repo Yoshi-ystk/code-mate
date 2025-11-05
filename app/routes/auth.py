@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, session, current_app
+from flask_login import login_user
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 from app.models.user import User, db
@@ -21,6 +22,8 @@ def top():
         password = request.form["password"]
         user = User.query.filter_by(email=email).first()
         if user and check_password_hash(user.password, password):
+            # Flask-Login によるログイン（既存のセッション併用）
+            login_user(user)
             session["user_id"] = user.id
             return redirect("/main")
         else:

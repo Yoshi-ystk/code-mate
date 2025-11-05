@@ -2,16 +2,18 @@ import os
 from flask import Flask, render_template, session, redirect
 from config import Config
 from app.models.user import db, User
+from app.extensions import login_manager
 from app.routes.auth import auth_bp
 from app.routes.profile import profile_bp
 from app.routes.recommend import recommend_bp
 from app.routes.recommend_profile import recommend_profile_bp
 from app.routes.like_push import like_push_bp
 from app.routes.likes_view import likes_view_bp
+from app.routes.chat import chat_bp
 from app.models.likes import Likes
 from flask_migrate import Migrate
-from app.routes.profile_search import profile_search_bp  # 検索機能追加7/26
-from sqlalchemy.sql import func  # ランダムでおすすめユーザーを生成7/30
+from app.routes.profile_search import profile_search_bp
+from sqlalchemy.sql import func
 
 
 def create_app():
@@ -25,6 +27,17 @@ def create_app():
     db.init_app(app)
 
     Migrate(app, db)
+
+    # Flask-Login setup
+    login_manager.init_app(app)
+    login_manager.login_view = "auth.top"
+
+    @login_manager.user_loader
+    def load_user(user_id: str):
+        try:
+            return User.query.get(int(user_id))
+        except Exception:
+            return None
 
     # DBファイルとフォルダの自動作成
     db_path = app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", "")
@@ -45,7 +58,8 @@ def create_app():
     app.register_blueprint(recommend_profile_bp)
     app.register_blueprint(like_push_bp)
     app.register_blueprint(likes_view_bp)
-    app.register_blueprint(profile_search_bp)  # 検索機能追加7/26
+    app.register_blueprint(profile_search_bp)
+    app.register_blueprint(chat_bp)
 
     #  ホーム画面（おすすめ表示）
     @app.route("/main")

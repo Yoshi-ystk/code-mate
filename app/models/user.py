@@ -1,9 +1,10 @@
 # UserモデルとSQLAlchemyインスタンス（db）を定義
 
 from app.models import db
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +16,4 @@ class User(db.Model):
     dev_field = db.Column(db.String(40))
     experience = db.Column(db.String(40))
     introduction = db.Column(db.Text)
-    image_path = db.Column(
-        db.String(60), default="default.png"
-    )  # 7/29山本修正 jpg→png変更
+    image_path = db.Column(db.String(60), default="default.png")
